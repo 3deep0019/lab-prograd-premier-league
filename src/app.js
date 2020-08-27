@@ -120,8 +120,72 @@ let SortByAge = () => {
 
 
 //Progression 10 - Sort players beloging to _____ team in descending order of awards won
+function FilterByTeamxSortByNoOfAwards() {
+  let players1 = players.slice()
 
+  players1.sort((player1, player2) => {
+    console.log(player1)
+    console.log(player2)
+
+    if (player1.awards.length > player2.awards.length) {
+      return -1
+    } else {
+      return 1
+    }
+  })
+  return players1
+}
 //Challenge 1 - Sort players that have won _______ award _____ times and belong to _______ country in alphabetical order of their names
+function SortByNamexAwardxTimes(awardName, noOfTimes, country) {
+  let choosenPlayers = []
+  for (const i of players) {
+    if (i.country == country) {
+      let count = 0
+      for (const j of i.awards) {
+        if (awardName = j.name) {
+          count++
+        }
+      }
 
+      if (count) {
+        choosenPlayers.push(player)
+      }
+    }
+  }
+  return choosenPlayers.sort((player1, player2) => {
+    if (player1.name.toUpperCase() > player2.name.toUpperCase()) {
+      return 1
+    } else {
+      return -1
+    }
+  })
+}
 //Challenge 2 - Sort players that are older than _____ years in alphabetical order
 //Sort the awards won by them in reverse chronological order
+function SortByNamexOlderThan(age) {
+  let choosenPlayers = []
+  for (const player of players) {
+    if (player.age >= age) {
+      let sortedAwards = player.awards
+      sortedAwards.sort((award1, award2) => {
+        if (award1.year > award2.year) {
+          return -1
+        } else {
+          return 1
+        }
+      })
+
+      player.awards = sortedAwards
+      choosenPlayers.push(player)
+    }
+  }
+
+  choosenPlayers.sort((player1, player2) => {
+    if (player1.name > player2.name) {
+      return 1
+    } else {
+      return -1
+    }
+  })
+  return choosenPlayers
+}
